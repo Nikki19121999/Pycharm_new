@@ -1,0 +1,61 @@
+RDD - Relisient Distributed Dataset
+
+Resilient: Restore the data on failure.
+Distributed: Data is distributed among different nodes.
+Dataset: Group of data.
+
+Defination:-RDD (Resilient Distributed Dataset) is a fundamental data structure in Apache Spark that represents a collection of objects distributed across a cluster.
+RDDs are designed to be fault-tolerant, immutable, and can be processed in parallel, making them suitable for big data applications.
+
+
+Features of RDD
+
+Resilience: RDDs are fault-tolerant. If a partition of an RDD is lost, it can be recomputed using the lineage of transformations that created it.
+
+Distributed: RDDs are distributed across the nodes of a cluster, allowing for parallel processing of data.
+
+Immutability: Once an RDD is created, it cannot be changed. However, you can create new RDDs from existing ones through transformations.
+
+In-memory Computation: RDDs can be cached in memory, enabling faster access and computation for iterative algorithms.
+
+Lazy Evaluation: Transformations on RDDs are evaluated lazily. The actual computation is deferred until an action is called, allowing Spark to optimize the execution plan.
+
+Transformations:
+Transformations are operations that create a new RDD from an existing one. They are lazy, meaning they do not compute their results immediately.
+Instead, they build up a lineage of transformations to be executed when an action is called.
+
+Actions:
+Actions are operations that trigger the execution of transformations and return a result to the driver program or write data to an external storage system.
+They materialize the RDD and are typically where the computation occurs.
+
+Spark Caching
+persist()
+Cache()
+unpersist()
+
+Both are Same with persist we can save in different location based on size of the dataframe.
+1.MEMORY_ONLY          --Memory-Only Storage
+2.MEMORY_AND_DISK      --Memory and Disk Storage
+3.DISK_ONLY            --Disk only
+4.MEMORY_ONLY_SER      -- Memory-Only Serialized
+5.MEMORY_AND_DISK_SER  --MEMORY_AND_DISK_SER
+6.MEMORY_ONLY_SER      --Off-Heap Storage
+
+print("is dataframe cached",is_cached) : we can check the whether dataframe is cached or not if yes it will return "True" else "False"
+
+Example:-
+df.persist(StorageLevel.MEMORY_AND_DISK)
+df1.cache()
+df.unpersist()
+
+Broadcast Variables:
+In PySpark RDD and DataFrame, Broadcast variables are read-only shared variables that are cached and available on all nodes in a cluster in-order to access or use by the tasks.
+Instead of sending this data along with every task,PySpark distributes broadcast variables to the workers using efficient broadcast algorithms to reduce communication costs.
+
+https://sparkbyexamples.com/pyspark/pyspark-broadcast-variables/ for my reference
+
+Joins
+nner Join: Combines matching keys from both RDDs.
+Left Outer Join: Includes all keys from the left RDD and matched keys from the right RDD.
+Right Outer Join: Includes all keys from the right RDD and matched keys from the left RDD.
+Full Outer Join: Includes all keys from both RDDs, with None for unmatched keys.
