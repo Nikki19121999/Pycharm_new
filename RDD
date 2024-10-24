@@ -93,3 +93,34 @@ RDD: Slower because it lacks these optimizations and does not leverage Spark's e
 RDDs are lower-level and less optimized, suitable for unstructured data.
 DataFrames provide a higher-level, optimized API for structured data.
 Datasets combine both, offering compile-time type safety and optimization.
+
+Transformations are two types
+1.Narrow Transformations(Do not shuffle data)
+--Narrow transformations are transformations where each partition of the parent RDD is used to compute at most one partition of the child RDD.
+In other words, there is a one-to-one relationship between the partitions of the parent and child.
+--They do not require data to be shuffled across the cluster.
+
+example:
+-filter()
+-Map()
+-union()
+
+2.Wide Transformations
+Wide transformations are transformations where each partition of the parent RDD can contribute to multiple partitions of the child RDD.
+This involves shuffling data across partitions, which can be more costly in terms of performance.
+-They often require data to be redistributed across the network.
+
+Example:
+-Join()
+-distinct()
+-groupByKey()
+-reducedByKey()
+
+• Understanding Shuffling in Spark
+Shuffling: Shuffling is the process of redistributing data across partitions. It occurs during wide transformations and is one of the most expensive operations in Spark.
+Causes of Shuffling:
+When performing operations that require data from multiple partitions to be combined or aggregated.
+Operations like groupBy, reduceBy, and join trigger shuffling.
+Impact on Performance:
+Shuffling can lead to increased latency and reduced performance due to network I/O, disk I/O, and increased memory usage.
+
