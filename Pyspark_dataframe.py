@@ -9,6 +9,8 @@ data = [
 ]
 # defining the schema
 columns = ["id", "name", "age"]
+
 df = spark.createDataFrame(data, schema=columns)
+
 df.show() # display the Dataframe
 spark.stop() # Stop the sparksession

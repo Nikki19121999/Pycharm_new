@@ -19,6 +19,5 @@ word_counts_sorted.show() # Display the dataframe
 rdd = word_counts_sorted.rdd #converting df to rdd
 
 print(rdd.collect()) #printing the rdd
-
 spark.stop()
 
