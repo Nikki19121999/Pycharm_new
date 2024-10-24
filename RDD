@@ -59,3 +59,37 @@ nner Join: Combines matching keys from both RDDs.
 Left Outer Join: Includes all keys from the left RDD and matched keys from the right RDD.
 Right Outer Join: Includes all keys from the right RDD and matched keys from the left RDD.
 Full Outer Join: Includes all keys from both RDDs, with None for unmatched keys.
+
+
+RDD, Dataframe, Dataset [Difference and Converting from one to
+Another]:
+• Which is faster & why
+• Differences Between RDD, Dataframe, and Dataset
+• Converting between RDD, Dataframe, and Dataset
+
+--RDD to Dataframe
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName("example").getOrCreate()
+df = rdd.toDF(["column1", "column2"])  # Specify column names
+
+--Dataframe to RDD
+rdd = df.rdd
+
+--From DataFrame to Dataset (in Scala)
+val ds = df.as[YourCaseClass]
+
+--From Dataset to DataFrame
+val df = ds.toDF()
+
+Which is Faster & Why
+DataFrame and Dataset: Generally faster than RDDs due to
+1.Catalyst Optimizer: Optimizes query plans for better performance.
+2.Tungsten Execution Engine: Provides memory management and code generation for faster execution.
+
+RDD: Slower because it lacks these optimizations and does not leverage Spark's execution engine fully.
+
+
+RDDs are lower-level and less optimized, suitable for unstructured data.
+DataFrames provide a higher-level, optimized API for structured data.
+Datasets combine both, offering compile-time type safety and optimization.
