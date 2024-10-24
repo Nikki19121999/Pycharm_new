@@ -1,0 +1,122 @@
+What is Big Data
+
+ Big Data refers to a collection of a very large and complicated set of data for which it becomes difficult to process using traditional or manual database management tools. The size of data grows exponentially and is generally in terabytes or more.
+
+Big Data
+
+• Types of data
+
+ 1.Structured Data
+
+ 2.Un Structured Data
+
+ 3.Semi Structured Data
+
+• Properties (3Vs)
+
+Velocity
+
+Volume
+
+Variety
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Introduction to Hadoop and Architecture:
+
+• Hadoop Introduction
+
+  Hadoop is an open-source framework from Apache and is used to store process and analyze data which are very huge in volume. Hadoop is written in Java and is not OLAP (online analytical processing). It is used for batch/offline processing.
+
+• Hadoop Architecture Overview
+
+  The Hadoop architecture is a package of the file system, MapReduce engine and the HDFS (Hadoop Distributed File System). The MapReduce engine can be MapReduce/MR1 or YARN/MR2.
+
+A Hadoop cluster consists of a single master and multiple slave nodes. The master node includes Job Tracker, Task Tracker, NameNode, and DataNode whereas the slave node includes DataNode and TaskTracker
+
+
+
+• NameNode
+
+  It is a single master server exist in the HDFS cluster.
+
+As it is a single node, it may become the reason of single point failure.
+
+It manages the file system namespace by executing an operation like the opening, renaming and closing the files.
+
+It simplifies the architecture of the system.
+
+• DataNode
+
+ The HDFS cluster contains multiple DataNodes.
+
+Each DataNode contains multiple data blocks.
+
+These data blocks are used to store data.
+
+It is the responsibility of DataNode to read and write requests from the file system's clients.
+
+It performs block creation, deletion, and replication upon instruction from the NameNode.
+
+• ResourceManager
+
+The Resource Manager (RM) in Apache Hadoop is the master that manages resources and schedules applications in the YARN system:
+
+ Resource management: The RM is responsible for tracking and allocating resources among all applications in the cluster.
+
+ Application scheduling: The RM schedules applications, such as MapReduce jobs.
+
+ Communication: The RM works with the NodeManagers and ApplicationMasters to manage resources and applications.
+
+• NodeManager
+
+The Hadoop Yarn Node Manager is the per-machine/per-node framework agent who is responsible for containers, monitoring their resource usage and reporting the same to the ResourceManager.
+
+
+
+• HDFS (Hadoop Distributed File System)
+
+  It states that the files will be broken into blocks and stored in nodes over the distributed architecture.
+
+The Hadoop Distributed File System (HDFS) is a distributed file system for Hadoop. It contains master/slave architecture. This architecture consists of a single NameNode performing the role of master, and multiple DataNodes performing the role of a slave.
+
+• MapReduce
+
+    This is a framework which helps Java programs to do parallel computation on data using key value pairs. The Map task takes input data and converts it into a data set which can be computed in Key value pair. The output of Map task is consumed by reduce task and then the out of reducer gives the desired result.
+
+• YARN (Yet Another Resource Negotiator)
+
+   It is used for job scheduling and managing the cluster.
+
