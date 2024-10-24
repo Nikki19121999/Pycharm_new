@@ -1,7 +1,7 @@
 # SparkSession
 
 from pyspark.sql import SparkSession
-from pyspark.sql import functions as F
+from pyspark.sql.functions import lit
 from datetime import date, datetime
 spark = SparkSession.builder.appName("Create DataFrame reading csv file").getOrCreate()
 #data
@@ -19,10 +19,10 @@ df = spark.createDataFrame(Data,schema)
 
 # • How to add the columns to df
 
-df_addcolumn = df.withColumn("Is_assign", F.lit("1"))
+df_addcolumn = df.withColumn("Gender",lit("M") )
 
 # • How to rename the columns in df
-df_renamed = df.withColumnRenamed("Is_assign","New_login")
+df_renamed = df_addcolumn.withColumnRenamed("Name","New_Name")
 # • Show(), collect()
 df_renamed.show()
 # • printSchema()
