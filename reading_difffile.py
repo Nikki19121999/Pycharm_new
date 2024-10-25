@@ -10,7 +10,6 @@ json_schema = StructType([
 df_json = spark.read.schema(json_schema).json("C:/Users/KorrakutiNikhilKumar/Downloads/Json.json")
 df_json.show()
 df_csv = spark.read.csv("C:\\Users\\korrakutinikhilkumar\\Downloads\\annual-enterprise-survey-2023-financial-year-provisional.csv", header=True, inferSchema=True)
-
 df_csv.show()
 
 
