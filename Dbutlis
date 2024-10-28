@@ -31,3 +31,18 @@ mkdirs(dir: String): boolean -> Creates the given directory if it does not exist
 mv(from: String, to: String, recurse: boolean = false): boolean -> Moves a file or directory, possibly across FileSystems
 put(file: String, contents: String, overwrite: boolean = false): boolean -> Writes the given String out to a file, encoded in UTF-8
 rm(dir: String, recurse: boolean = false): boolean -> Removes a file or directory
+
+
+
+
+Implementation Steps:
+
+Identify Key Queries: Collaborated with stakeholders to identify the most frequently used queries needed for daily, weekly, and monthly sales reports.
+
+Script Development:
+
+Wrote SQL scripts to automate the execution of these queries. For example, a script that aggregates daily sales data by product category and region.
+Implemented scheduling tools (like cron jobs) to run these scripts at designated times without manual intervention.
+Testing and Validation: Conducted thorough testing to ensure the scripts returned accurate results and handled edge cases, such as missing data.
+
+Deployment: Deployed the scripts in the production environment, setting up alerts for any failures to ensure continuous operation.
