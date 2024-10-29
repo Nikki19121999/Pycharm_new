@@ -1,0 +1,47 @@
+For my understanding...
+
+Uploading Files to Databricks
+
+1. Using the Databricks Workspace UI
+You can easily upload files to your Databricks workspace using the user interface.
+
+Steps:
+Open the Databricks Workspace: Log in to your Databricks account and navigate to the workspace.
+Navigate to the Files Tab: In the sidebar, click on the "Workspace" tab or the "Data" tab.
+Upload Files:
+Click on the "Add Data" button or the "Upload" option (usually represented by a cloud icon).
+Select the file(s) you want to upload from your local machine.
+Confirm Upload: Once the upload is complete, the files will be available in the "DBFS" (Databricks File System).
+
+
+2. Using Databricks CLI
+You can also use the Databricks Command-Line Interface (CLI) to upload files programmatically.
+
+Steps:
+Install Databricks CLI: If not already installed, follow the Databricks CLI installation instructions.
+Configure CLI: Run databricks configure --token and provide your Databricks workspace URL and access token.
+Upload File: Use the following command:
+bash
+Copy code
+databricks fs cp local_file_path dbfs:/path/in/databricks/
+
+
+3. Using Notebook Commands
+You can also upload files directly in a notebook using the following command:
+
+python
+Copy code
+dbutils.fs.put("dbfs:/path/in/databricks/filename.txt", "file content", overwrite=True)
+
+
+
+
+
+#Handling Corrupt Records in CSV
+
+df_csv = spark.read.option("mode", "DROPMALFORMED").csv("dbfs:/path/to/your/directory/filename.csv")
+
+#Specifying Delimiters For CSV files, you can specify a different delimiter
+
+df_csv = spark.read.option("delimiter", ";").csv("dbfs:/path/to/your/directory/filename.csv")
+

@@ -1,0 +1,71 @@
+Analysis Exceptions
+Analysis Exceptions occur when there are issues with the  **logical plan**   of your DataFrame operations. These exceptions are typically thrown during the execution of actions
+(like show(), collect(), etc.) or transformations if Spark cannot resolve certain columns, functions, or other identifiers.
+
+parse Exception
+ Parse Exception usually occurs when there is an issue with the syntax of a SQL query or when parsing data in a specific format (like JSON or CSV) fails due to incorrect structure or unexpected data.
+
+Query Execution exceptions
+Query Execution Exceptions occur during the execution of a DataFrame operation or SQL query.
+These exceptions typically indicate issues that arise while Spark is trying to run the logical plan generated from your DataFrame transformations or SQL statements.
+
+Spark Exception
+A generic exception that can encompass various issues in Spark, such as task failures or resource allocation problems
+unsupported operation exception
+
+metadata exception
+Metadata Exception typically arises when there are issues related to the metadata of a DataFrame or SQL table. This can involve problems with the schema, table definitions, or the underlying data source configuration.
+
+RuntimeException
+Cause: A general exception that occurs during execution, often due to issues like illegal state or unsupported operations.
+
+OutOfMemoryError
+Cause: Spark tasks may run out of memory due to insufficient resources allocated to the driver or executors.
+
+JobExecutionException
+Cause: Raised when a job fails, wrapping the underlying cause, such as a failed task.
+
+
+Connecting with external systems
+-Api integrations
+
+import requests
+
+response = requests.get("https://api.example.com/data")
+data = response.json()
+df = spark.createDataFrame(data)
+
+
+SQL connection
+jdbc_url = "jdbc:sqlserver://<server_name>.database.windows.net:1433;database=<database_name>"
+properties = {
+    "user": "<username>",
+    "password": "<password>",
+    "driver": "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+}
+
+df = spark.read.jdbc(url=jdbc_url, table="<table_name>", properties=properties)
+
+
+To read the xl file we have to install openpyxl library in databricks and read the data by selecting sheet name
+
+try: import openpyxl
+except import error:
+     from pip._internal import main as pip
+     pip(['install','openpyxl'])
+     import openpyxl
+
+import pandas as p
+df_excel= pd.read_excel('path',engine='',sheet_name='')
+df=spark.createDataFrame(df_excel,schema="")
+
+
+or
+looping
+
+import openpyxl as xl
+sheet_xl= xl.load_workbook('path')
+for sheet in sheet_xl.sheet_names:
+    df_excel =  pd.read_xl('path',engine='',sheet_name='')
+    df=spark.createDataFrame(df_excel,schema="")
+    df.write.mode('append').save("path")
