@@ -16,4 +16,4 @@ l = [
 ]
 df = spark.createDataFrame(l, ["ID", "NAME", "COUNTRY", "Date_part"])
 df1 = df.groupBy("ID", "Date_part").pivot("NAME").agg(collect_list("COUNTRY"))
-df1.show()x
+df1.show()

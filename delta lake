@@ -1,0 +1,50 @@
+
+
+
+
+Read older versions of data using time travel
+df = spark.read.format("delta") \
+  .option("versionAsOf", 0) \
+  .load("/tmp/delta-table")
+
+df.show()
+
+
+Conditional update without overwrite (work as scd type 1)
+Delta Lake provides programmatic APIs to conditional update, delete, and merge (upsert) data into tables. Here are a few examples:
+
+from delta.tables import *
+from pyspark.sql.functions import *
+
+deltaTable = DeltaTable.forPath(spark, "/tmp/delta-table")
+
+# Update every even value by adding 100 to it
+deltaTable.update(
+  condition = expr("id % 2 == 0"),
+  set = { "id": expr("id + 100") })
+
+# Delete every even value
+deltaTable.delete(condition = expr("id % 2 == 0"))
+
+# Upsert (merge) new data
+newData = spark.range(0, 20)
+deltaTable.alias("oldData") \
+  .merge(
+    newData.alias("newData"),
+    "oldData.id = newData.id") \
+  .whenMatchedUpdate(set = { "id": col("newData.id") }) \
+  .whenNotMatchedInsert(values = { "id": col("newData.id") }) \
+  .execute()
+
+deltaTable.toDF().show()
+
+
+Databricks uses Delta Lake by default for all reads and writes and builds upon the ACID guarantees provided by the open source Delta Lake protocol. ACID stands for atomicity, consistency, isolation, and durability.
+
+Atomicity means that all transactions either succeed or fail completely.
+
+Consistency guarantees relate to how a given state of the data is observed by simultaneous operations.
+
+Isolation refers to how simultaneous operations potentially conflict with one another.
+
+Durability means that committed changes are permanent.

@@ -75,7 +75,6 @@ df.select(F.lpad("Name",10,"_").alias("lpad")).show()
 
 df.select(F.length("Name").alias("Length_of_name")).show()
 
-
 df.select(F.substring("Name",1,4).alias("substr")).show()
 
 #Subtstring_index
