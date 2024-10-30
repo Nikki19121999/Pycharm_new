@@ -1,0 +1,17 @@
+Authentication:
+
+APIs often require authentication to ensure that only authorized users can access certain functionalities.
+Common methods include API keys, OAuth, and JWT (JSON Web Tokens)
+
+
+
+Types of APIs
+Web APIs:
+
+These are designed for communication over the web and are the most common type. They often use REST (Representational State Transfer) or SOAP (Simple Object Access Protocol) protocols.
+Library APIs:
+
+These are used within software libraries or frameworks, allowing developers to access functions and services within that library.
+Operating System APIs:
+
+These provide access to the underlying features of an operating system, enabling software applications to interact with system hardware and resources.
